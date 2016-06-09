@@ -55,6 +55,14 @@ html,body {
 	margin: 0px 0px 30px 0px !important;
 }
 
+/*#warning{
+	background-color: yellow;
+}*/
+#warning{
+	color: red;
+	font-size: 20px;
+	align-content: center;
+}
 .form-control,
 .input-group {
 	height: 40px;

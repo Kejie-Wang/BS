@@ -7,53 +7,85 @@
 	<title>
 		login
 	</title>
-	<!-- Bootstrap Core CSS -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+	<link rel="stylesheet" href="jquery/jquery-ui.min.css">
+	<link rel="stylesheet" href="jquery/jquery-ui.theme.css">
+	<link rel="stylesheet" href="jquery/jquery-ui.theme.min.css">
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+
+	<script type="text/javascript" src="jquery/external/jquery/jquery.js"></script>
+	<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 	<!-- Custom CSS -->
-	<link href="css/login.css" ype="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/login.css" >
+
+	<script type="text/javascript" language="javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				$.post("/auth/login", {
+					username: document.getElementById("username").value,
+					password: document.getElementById("password").value
+				}, function(msg){
+					if(msg['success']){
+						window.location.href = msg.url;
+					}else{
+						document.getElementById("warning").innerText = "Incorrect username or password.";
+					}
+				});
+			});
+		});
+	</script>
+
 </head>
 
 <body>
 <div class="box">
 		<div class="login-box">
 			<div class="login-title text-center">
-				<h1><small>Sign into Connection</small></h1>
+				<h1><small>Sign into Message</small></h1>
 			</div>
 			<div class="login-content ">
 			<div class="form">
-			<form action="/auth/login" method="post">
-				<div class="form-group">
-					<div class="col-xs-12  ">
-						<div class="input-group">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-							<input type="text" id="username" name="username" class="form-control" placeholder="Username">
-						</div>
+			<!-- <form action="/auth/login" method="post"> -->
+			<div class="form-group">
+				<div class="col-xs-12  ">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+						<input type="text" id="username" name="username" class="form-control" placeholder="Username">
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-xs-12  ">
-						<div class="input-group">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-							<input type="text" id="password" name="password" class="form-control" placeholder="Password">
-						</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12  ">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+						<input type="text" id="password" name="password" class="form-control" placeholder="Password">
 					</div>
 				</div>
-				<div class="form-group form-actions">
-					<div class="col-xs-4 col-xs-offset-4 ">
-						<button type="submit" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-off"></span> Login</button>
-					</div>
+			</div>
+			<div>
+				<p align="center"  id="warning"></p>
+			</div>
+			<div class="form-group form-actions">
+				<div class="col-xs-4 col-xs-offset-4 ">
+					<button id="submit" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-off"></span> Login</button>
 				</div>
-				<div class="form-group">
-					<div class="col-xs-6 link">
-						<p class="text-center remove-margin"><small>Forget Password？</small> <a href="javascript:void(0)" ><small>找回</small></a>
-						</p>
-					</div>
-					<div class="col-xs-6 link">
-						<p class="text-center remove-margin"><small>New to Connection?</small> <a href="javascript:void(0)" ><small>Register</small></a>
-						</p>
-					</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-6 link">
+					<p class="text-center remove-margin"><small>Forget Password？</small> <a href="javascript:void(0)" ><small>找回</small></a>
+					</p>
 				</div>
-			</form>
+				<div class="col-xs-6 link">
+					<p class="text-center remove-margin"><small>New to Connection?</small> <a href="javascript:void(0)" ><small>Register</small></a>
+					</p>
+				</div>
+			</div>
+			<!-- </form> -->
 			</div>
 		</div>
 	</div>

@@ -26,7 +26,7 @@ var pool = mysql.createPool({
 *		The param err is the query generate
 *		The param result is the query result
 */
-function query(sql, callback) {
+exports.query = function(sql, callback) {
     console.log(sql);
     pool.getConnection(function (err, conn) {
         if (err) {
@@ -44,5 +44,3 @@ function query(sql, callback) {
         }
     });
 }
-
-modules.exports = query;
