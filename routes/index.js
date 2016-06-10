@@ -3,11 +3,15 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('home');
 });
 
 router.get('/login', function(req, res, next){
   res.render('login');
+});
+
+router.get('/index', function(req, res, next){
+  res.render('index');
 });
 
 var auth = require('../db/authorization');
@@ -15,12 +19,12 @@ router.post('/auth/login', function(req, res, next){
 	console.log(req.body);
 	var username = req.body.username;
 	var password = req.body.password;
-	auth.SignInAuth(username, password, (users)=>{
+	auth.signInAuth(username, password, (users)=>{
 		console.log(users);
 		if(users.length == 0)
 			res.send({'success': false});
 		else
-			res.send({'success': true, 'url': '/'});
+			res.send({'success': true, 'url': '/index'});
 	});
 });
 

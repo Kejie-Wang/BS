@@ -12,11 +12,22 @@
     <title>Message</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="jquery/jquery-ui.min.css">
+	<link rel="stylesheet" href="jquery/jquery-ui.theme.css">
+	<link rel="stylesheet" href="jquery/jquery-ui.theme.min.css">
 
-    <!-- Custom CSS -->
-    <link href="css/full-slider.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
 
+	<script type="text/javascript" src="jquery/external/jquery/jquery.js"></script>
+	<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+
+	<link href="css/index.css" rel="stylesheet">
+
+	<link href="/image/logo.ico" rel="shortcut icon">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,122 +38,243 @@
 </head>
 
 <body>
+<div class="contain-fluild">
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- Navigation Start -->
+			<nav class="navbar navbar-default" role="navigation">
+		            <!-- Brand and toggle get grouped for better mobile display -->
+		            <div class="navbar-header">
+		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		                    <span class="sr-only">Toggle navigation</span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                </button>
+		  			  <img class="navbar-brand" alt="logo" src="/image/logo.png">
+		                <p class="nav navbar-left">Message</p>
+		            </div>
+		        <!-- /.container -->
+		    </nav>
+			<!-- Navigation End -->
+		</div>
+	</div>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href=#>InstantChat</a>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                  <li>
-                      <a id="signIn" href="/login">Sign in</a>
-                  </li>
-                  <li>
-                      <a id="signUp" href="services.html">Sign up</a>
-                  </li>
-              </ul>
-          </div>
-          <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container -->
-  </nav>
+	<!-- chats and contacts tab Begin -->
+	<div class="row-fluid">
+			<div class="col-md-4">
+				<ul id="tab" class="nav nav-tabs">
+					<li class="active">
+				      <a href="#chats" data-toggle="tab">
+				         Chats
+				      </a>
+				   </li>
+				   <li>
+					   <a href="#contacts" data-toggle="tab">
+						   Contacts
+					   </a>
+				   </li>
+				</ul>
+
+				<!-- chats and contacts tab content begin -->
+				<div id="tabContent" class="tab-content">
+					<!-- chats tab content begin -->
+					<div class="tab-pane fade in active" id="chats">
+						<div class="list-group"  height="100px">
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p align="center">Jack<p></td>
+										<td><p align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p align="center">Jack<p></td>
+										<td><p align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p align="center">Jack<p></td>
+										<td><p align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<a href="#"  class="list-group-item">
+								<table border="0px">
+									<tr>
+										<td width="15%"><img src="/image/logo.png" width="100%"></td>
+										<td><p href="#" align="center">Jack<p></td>
+										<td><p  align="center">00:20</p>
+									</tr>
+								</table>
+							</a>
+							<!-- <div class="list-group-item">
+								<img src="/image/logo.png">
+								<a href="#">Jack<a>
+								<p> 00:20</p>
+							</div> -->
+						</div>
+						<!-- <ul class="list-group">
+						   <li class="list-group-item" align="center">免费域名注册</li>
+						   <li class="list-group-item" align="center">免费 Window 空间托管</li>
+						   <li class="list-group-item" align="center">图像的数量</li>
+						   <li class="list-group-item" align="center">24*7 支持</li>
+						   <li class="list-group-item" align="center">每年更新成本</li>
+						</ul> -->
+					</div>
+					<div class="tab-pane fade" id="contacts">
+			            <div class="panel-group" id="accordion2">
+			                <div class="panel panel-default">
+			                    <div class="panel-heading" data-toggle="collapse"
+			                        data-parent="#accordion2" href="#collapseOne">
+			                        <a class="accordion-toggle">Java</a>
+			                    </div>
+			                    <div id="collapseOne" class="panel-collapse collapse"
+			                        style="height: 0px;">
+			                        <div class="panel-body">
+			                            <ul class="nav nav-pills nav-stacked">
+			                                <li><a href="#">Java基础</a></li>
+			                                <li><a href="#">Java面向对象</a></li>
+			                            </ul>
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="panel panel-default">
+			                    <div class="panel-heading" data-toggle="collapse"
+			                        data-parent="#accordion2" href="#collapseTwo">
+			                        <a class="accordion-toggle">数据库</a>
+			                    </div>
+			                    <div id="collapseTwo" class="panel-collapse collapse"
+			                        style="height: 0px;">
+			                        <div class="panel-body">
+			                            <ul class="nav nav-pills nav-stacked">
+			                                <li><a href="#">SQL基础</a></li>
+			                                <li><a href="#">Oracle</a></li>
+			                                <li><a href="#">MySQL</a></li>
+											<li><a href="#">SQL基础</a></li>
+			                                <li><a href="#">Oracle</a></li>
+			                                <li><a href="#">MySQL</a></li>
+			                            </ul>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+
+				</div>
+				<!-- chats and contacts tab content end -->
+			</div>
+			<div class="col-md-8"></div>
+	</div>
+
+	<!-- chats and contacts tab End -->
 
 
-    <!-- Full Page Image Background Carousel Header -->
-    <header id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for Slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('/image/home1.jpg');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 1</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 3</h2>
-                </div>
-            </div>
-
-
-
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
-
-    </header>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Full Slider by Start Bootstrap</h1>
-                <p>The background images for the slider are set directly in the HTML using inline CSS. The rest of the styles for this template are contained within the <code>full-slider.css</code>file.</p>
-            </div>
-        </div>
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; InstantChat  2016</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
-
-    </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
-
+</div>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  -->

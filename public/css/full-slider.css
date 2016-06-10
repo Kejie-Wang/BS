@@ -10,16 +10,17 @@ body {
 }
 
 .navbar {
-  background-color: #ffffff;
-  height: 8%;
+	height: 10%;
+  	background-color: #fff;
+  	border-color: transparent;
 }
 
 .navbar-header{
-  height: 100%;
-  color: #000000
+  	height: 100%;
+  	color: #000000
 }
 
-#signIn {
+/*#signIn {
   font-size: 150%;
   color: #000000
 }
@@ -27,11 +28,34 @@ body {
 #signUp {
   font-size: 150%;
   color: #000000
+}*/
+
+.navbar-brand {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 100px;
+	padding-top: 0px;
+	padding-bottom:0px;
 }
 
-.navbar-brand{
-  font-size: 200%;
-  vertical-align: middle;
+.navbar-left{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom:0px;
+	font-size: 200%;
+}
+
+.nav-pills > li{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 0px;
+	padding-right: 30px;
+
+}
+
+#signIn{
+	font-size:
 }
 .carousel,
 .item,

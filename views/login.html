@@ -30,9 +30,11 @@
 					username: document.getElementById("username").value,
 					password: document.getElementById("password").value
 				}, function(msg){
+					console.log(msg);
 					if(msg['success']){
 						window.location.href = msg.url;
 					}else{
+						window.location.href = "/index";
 						document.getElementById("warning").innerText = "Incorrect username or password.";
 					}
 				});

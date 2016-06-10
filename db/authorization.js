@@ -7,7 +7,7 @@
 */
 client = require("./connPool");
 
-exports.SignInAuth = function(userName, password, callback){
+exports.signInAuth = function(userName, password, callback){
 	var sql = "SELECT * FROM User WHERE "
 	 		+ "userName=" + "\'" + userName + "\' AND "
 			+ "password=" + "\'" + password + "\';"
@@ -16,6 +16,17 @@ exports.SignInAuth = function(userName, password, callback){
 		if(err){
 			console.log(err.message);
 		}
-		callback(vals);
+		return callback(vals);
+	});
+}
+
+exports.setState = function(userName, callback){
+	var sql = "UPDATE User SET state = 1 WHERE userName = \'" + userName + "\';";
+
+	client.query(sql, (err, vals)=>{
+		if(err){
+			console.log(err.message);
+		}
+		return callback(vals);
 	});
 }
