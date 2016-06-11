@@ -10,7 +10,7 @@
 
 var MINPASSWDLENGTH = 6; //the minimun length of the password
 
-query = require("./connPool");
+client = require("./connPool");
 
 /*@brief Check whehter the user name is legal
 *	check whether the user name is empty
@@ -22,7 +22,11 @@ function userNameCheck(userName){
 		throw new Error("The username can not be empty!");
 	}
 	var userSelectSql = "SELECT * FROM User WHERE username='" + userName + "';";
-	query(userSelectSql, function(res){
+	console.log(userSelectSql);
+	client.query(userSelectSql, (err, res)=>{
+		if(err){
+			throw err;
+		}
 		if(res.length != 0){	//this user name not exit
 			throw new Error("This username already exits!");
 		}
@@ -70,15 +74,16 @@ function mailboxCheck(mailbox){
 *		err: The error Message
 *		vals: The return values
 */
-exports.CreateAnUser = function(userInfo, callback){
-
-	var userName = userInfo['userName'];
+exports.createAnUser = function(userInfo, callback){
+	console.log("userInfo", userInfo);
+	var userName = userInfo['username'];
 	var password = userInfo['password'];
-	var mailbox = userInfo['mailbox'];
+	var mailbox = userInfo['email'];
 	var state = 0;
 	var gender = userInfo['gender'];
 	var birthday = userInfo['birthday'];
-	var address = userInfo['phoneNumber'];
+	var phoneNumber = userInfo['phoneNumber'];
+	var address = userInfo['address'];
 	var realName = userInfo['realName'];
 
 	try{
@@ -89,7 +94,7 @@ exports.CreateAnUser = function(userInfo, callback){
 			+ "\'" + userName + "\', "
 			+ "\'" + password + "\', "
 			+ "\'" + mailbox + "\', "
-			+ "\'" + state + "\', ";
+			+ state + ", ";
 
 		if(typeof(gender) == 'undefined' || gender == null)
 			insertSql += "null, ";
@@ -107,15 +112,18 @@ exports.CreateAnUser = function(userInfo, callback){
 		else
 			insertSql += ("\'" + address + "\', ");
 
+		if(typeof(phoneNumber) == 'undefined' || phoneNumber == null)
+			insertSql += "null, ";
+		else
+			insertSql += ("\'" + phoneNumber + "\', ");
+
 		if(typeof(realName) == 'undefined' || realName == null)
 			insertSql += "null, ";
 		else
 			insertSql += ("\'" + realName + "\', ");
 
 		insertSql += ("now());")
-
-		query(insertSql, callback);
-
+		client.query(insertSql, callback);
 	}catch(err){
 		callback(err, null);
 	}

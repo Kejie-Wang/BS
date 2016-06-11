@@ -27,7 +27,7 @@ var pool = mysql.createPool({
 *		The param result is the query result
 */
 exports.query = function(sql, callback) {
-    console.log(sql);
+    console.log("in conn pool:", sql);
     pool.getConnection(function (err, conn) {
         if (err) {
 			console.log("Get connection error");
