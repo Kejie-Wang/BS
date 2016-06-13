@@ -157,7 +157,7 @@ exports.setSateVal = function(userName, state, callback){
 	client.query(sql, callback);
 }
 
-exports.getAvartar = function(userName callback){
+exports.getAvartar = function(userName, callback){
 	var sql = "SELECT avatar FROM User;";
 
 	client.query(sql, callback);
@@ -166,7 +166,7 @@ exports.getAvartar = function(userName callback){
 exports.userSearch = function(userName, callback){
 	var sql = "SELECT userName FROM User WHERE userName LIKE \'%" + userName + "%\';";
 
-	client.query(sql. callback); 
+	client.query(sql. callback);
 }
 
 

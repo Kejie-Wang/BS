@@ -7,7 +7,7 @@
 */
 var LISTIDLENGTH = 50;
 
-exports.addAList(username, listName, callback){
+exports.addAList= function(username, listName, callback){
 	var selectSql = "SELECT MAX(listID) FROM List";
 	client.query(selectSql, (err, res)=>{
 		if(err){
@@ -32,7 +32,7 @@ exports.addAList(username, listName, callback){
 	});
 }
 
-exports.deleteAList(username, listName, callback){
+exports.deleteAList = function(username, listName, callback){
 	var deleteSql = "DELETE FROM List WHERE "
 					+"listName=\'" + listName + "\' AND"
 					+"userName=\'" + username + "\';";
@@ -40,7 +40,7 @@ exports.deleteAList(username, listName, callback){
 	client.query(deleteSql, callback);
 }
 
-exports.getAllList(userName, callback){
+exports.getAllList = function(userName, callback){
 	var selectSql = "SELECT listName FROM List WHERE listName=\'" + listName + "\';";
 	client.query(selectSql, callback);
 }
