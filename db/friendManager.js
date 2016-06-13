@@ -1,7 +1,8 @@
 /*!
 *Message
 *@brief This is the mysql interface used to manage the friend table
-*
+*@author Jack<wang_kejie@foxmail.com>
+*@copyright(c) 2016 Jack
 */
 
 client = require("./connPool");

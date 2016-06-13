@@ -44,6 +44,7 @@ create table Message(
 	messageTo varchar(50),
 	messageContent varchar(200),
 	isSend tinyint(1) not null, #1->has been sent 1->not been sent
+	sendTime timestamp not null,
 	foreign key(messageFrom) references User(userName),
 	foreign key(messageTo) references User(userName)
 );
