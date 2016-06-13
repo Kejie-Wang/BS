@@ -12,6 +12,11 @@ body {
   	color: #000000
 }
 
+.nav-user-avar{
+	width: 40px;
+	height: 40px;
+}
+
 .nav-tabs{
 	height: 100%;
 }
@@ -37,7 +42,7 @@ body {
 }
 
 .nav-tabs > li{
-	width: 50%;
+	width: 33%;
 	padding: 5px;
 	margin-right: 0px;
 	margin-right: 0px;
@@ -75,6 +80,49 @@ body {
 	border: 1px solid transparent;
 	height: 30%；
 }
+
+/*a self designed button begin*/
+.btn-black{
+    color: #ffffff;
+    background-color: rgb(50, 50, 50);
+    border-color: rgb(50, 50, 50);
+}
+
+.btn-black:hover,
+.btn-black:focus,
+.btn-black:active,
+.btn-black.active,
+.open .dropdown-toggle.btn-black {
+    color: #ffffff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-black:active,
+.btn-black.active,
+.open .dropdown-toggle.btn-black {
+    background-image: none;
+}
+
+.btn-black.disabled,
+.btn-black[disabled],
+fieldset[disabled] .btn-black,
+.btn-black.disabled:hover,
+.btn-black[disabled]:hover,
+fieldset[disabled] .btn-black:hover,
+.btn-black.disabled:focus,
+.btn-black[disabled]:focus,
+fieldset[disabled] .btn-black:focus,
+.btn-black.disabled:active,
+.btn-black[disabled]:active,
+fieldset[disabled] .btn-black:active,
+.btn-black.disabled.active,
+.btn-black[disabled].active,
+fieldset[disabled] .btn-black.active {
+    background-color: #000;
+    border-color: #000;
+}
+/*a self designed button end*/
 .user-avar{
 	width: 40px;
 	height: 40px;
@@ -175,6 +223,26 @@ td{
 }
 
 
+/*contacts tab css*/
+.contacts-panel
+{
+    height: 500px;
+	margin-bottom: 0px;
+    overflow-y: auto;
+}
+
+.accordion-group{
+	padding-bottom: 5%;
+}
+
+.accordion-toggle{
+	font-size: 20px;
+}
+
+.glyphicon-play{
+	padding-left: 0px;
+	margin-right: 5%
+}
 
 
 

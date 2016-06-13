@@ -8,6 +8,7 @@ use Message;
 create table User(
 	userName varchar(50),
 	password varchar(50) not null,
+	avatar varchar(50), 
 	mailbox varchar(50) not null,
 	state tinyint(1) not null, #0->online 1->offline
 	gender tinyint(1),	#0->female, 1->male

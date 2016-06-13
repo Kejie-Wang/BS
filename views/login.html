@@ -30,7 +30,7 @@
 		$(document).ready(function(){
 			$("#submit").click(function(){
 				$.post("/auth/login", {
-					username: document.getElementById("username").value,
+					userName: document.getElementById("username").value,
 					password: document.getElementById("password").value
 				}, function(msg){
 					console.log(msg);

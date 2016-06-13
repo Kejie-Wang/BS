@@ -7,7 +7,7 @@
 
 client = require("./connPool");
 
-exports.buildAFriend(var friendName1, var friendName2, var friendList1, var friendList2, callback){
+exports.buildAFriend(friendName1, friendName2, friendList1, friendList2, callback){
 	var insertSql = "INSERT INTO Friend VALUES("
 					+"\'" + friendName1 + "\',"
 					+"\'" + friendName2 + "\',"
@@ -17,7 +17,7 @@ exports.buildAFriend(var friendName1, var friendName2, var friendList1, var frie
 	client(insertSql, callback);
 }
 
-exports.deleteAFriend(var friendName1, var friendName2, callback){
+exports.deleteAFriend(friendName1, friendName2, callback){
 	var deleteSql = "DELETE FROM Friend WHERE"
 				+ "friendName1=" + "\'" + friendName1 + "\' AND "
 				+ "friendName2=" + "\'" + friendName2 + "\'"

@@ -1,10 +1,10 @@
 /*!
 *Message
-*@brief This is the mysql interface used to manager the user tbale in the mysql
+*@brief This is the mysql interface used to manage the user tbale in the mysql
 *@function createAnUser Create an user by the provided user inf0
 *		It will check whether the parameters is legal or not
-*		The username, password and mailbox must not be empty
-*		The username must not exit and the password length must not shorter the six
+*		The userName, password and mailbox must not be empty
+*		The userName must not exit and the password length must not shorter the six
 *@function setSateVal: Set the user state online or offline
 *@function updateUserInfo: Update the user infomation
 *@author Jack<wang_kejie@foxmail.com>
@@ -18,20 +18,20 @@ client = require("./connPool");
 /*@brief Check whehter the user name is legal
 *	check whether the user name is empty
 *	check whether the user name exits or not
-*@param userName The checked username
+*@param userName The checked userName
 */
 function userNameCheck(userName){
 	if(typeof(userName) == 'undefined' || userName == null){
-		throw new Error("The username can not be empty!");
+		throw new Error("The userName can not be empty!");
 	}
-	var userSelectSql = "SELECT * FROM User WHERE username='" + userName + "';";
+	var userSelectSql = "SELECT * FROM User WHERE userName='" + userName + "';";
 	console.log(userSelectSql);
 	client.query(userSelectSql, (err, res)=>{
 		if(err){
 			throw err;
 		}
 		if(res.length != 0){	//this user name not exit
-			throw new Error("This username already exits!");
+			throw new Error("This userName already exits!");
 		}
 	});
 }
@@ -79,8 +79,9 @@ function mailboxCheck(mailbox){
 */
 exports.createAnUser = function(userInfo, callback){
 	console.log("userInfo", userInfo);
-	var userName = userInfo['username'];
+	var userName = userInfo['userName'];
 	var password = userInfo['password'];
+	var avatar = "/avatar/default.png"
 	var mailbox = userInfo['email'];
 	var state = 0;
 	var gender = userInfo['gender'];
@@ -96,6 +97,7 @@ exports.createAnUser = function(userInfo, callback){
 		var insertSql = "INSERT INTO User VALUES ("
 			+ "\'" + userName + "\', "
 			+ "\'" + password + "\', "
+			+ "\'" + avatar   + "\', "
 			+ "\'" + mailbox + "\', "
 			+ state + ", ";
 
@@ -133,10 +135,10 @@ exports.createAnUser = function(userInfo, callback){
 }
 
 /*@brief The interface used to check the user is online or offline
-*@params username The checked user name
+*@params userName The checked user name
 */
-exports.getState = function (username) {
-	var sql = "SELECT * FROM User WHERE username=\'" + username + "\';";
+exports.getState = function (userName) {
+	var sql = "SELECT * FROM User WHERE userName=\'" + userName + "\';";
 	client.query(sql, (err, vals)=>{
 		if(vals['state'] == 1){
 			return true;
@@ -146,15 +148,26 @@ exports.getState = function (username) {
 }
 
 /*@brief The interface used to set the user state: oneline or offline
-*@param username: The user name you set
+*@param userName: The user name you set
 *@param stete: The set state 0->offline 1->online
 */
-exports.setSateVal = function(username, state, callback){
+exports.setSateVal = function(userName, state, callback){
 	var val = state ? 1 : 0;
-	var sql = "UPDATE User SET state=" + val + " WHERE username=\'" + username + "\';"
+	var sql = "UPDATE User SET state=" + val + " WHERE userName=\'" + userName + "\';"
 	client.query(sql, callback);
 }
 
+exports.getAvartar = function(userName callback){
+	var sql = "SELECT avatar FROM User;";
+
+	client.query(sql, callback);
+}
+
+exports.userSearch = function(userName, callback){
+	var sql = "SELECT userName FROM User WHERE userName LIKE \'%" + userName + "%\';";
+
+	client.query(sql. callback); 
+}
 
 
 

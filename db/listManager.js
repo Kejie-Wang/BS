@@ -1,13 +1,13 @@
 /*!
 *Message
 *@brief This is the mysql interface used to manage the list table in the mysql database\
-*@fucntion 
+*@fucntion
 *@author Jack<wang_kejie@foxmail.com>
 *@copyright(c) 2016 Jack
 */
 var LISTIDLENGTH = 50;
 
-exports.addAList(username, listname, callback){
+exports.addAList(username, listName, callback){
 	var selectSql = "SELECT MAX(listID) FROM List";
 	client.query(selectSql, (err, res)=>{
 		if(err){
@@ -23,7 +23,7 @@ exports.addAList(username, listname, callback){
 				newID = '0' + newID;
 			var insertSql = "INSERT INTO LIST VALUES("
 				+ "\'" + newID + "\', "
-				+ "\'" + listname + "\', "
+				+ "\'" + listName + "\', "
 				+ "\'" + username + "\');";
 			client.query(insertSql, (err, res)=>{
 				callback(err, res);
@@ -32,10 +32,15 @@ exports.addAList(username, listname, callback){
 	});
 }
 
-exports.deleteAList(username, listname, callback){
+exports.deleteAList(username, listName, callback){
 	var deleteSql = "DELETE FROM List WHERE "
-					+"listName=\'" + listname + "\' AND"
+					+"listName=\'" + listName + "\' AND"
 					+"userName=\'" + username + "\';";
 
 	client.query(deleteSql, callback);
+}
+
+exports.getAllList(userName, callback){
+	var selectSql = "SELECT listName FROM List WHERE listName=\'" + listName + "\';";
+	client.query(selectSql, callback);
 }
