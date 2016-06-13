@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 .navbar {
-	height: 10%;
+	height: 8%;
   	background-color: #fff;
   	border-color: transparent;
 }
@@ -30,6 +30,10 @@ body {
 	padding-top: 5px;
 	padding-bottom:0px;
 	font-size: 200%;
+}
+
+.nav-tabs{
+	border: transparent;
 }
 
 .nav-tabs > li{
@@ -65,17 +69,124 @@ body {
 	padding-top: 5px;
 }
 
-.panel-default{
-	width: 100%;
+/*the chat and contancts head*/
+.panel-title{
+	background-color: rgb(50, 50, 50);
+	border: 1px solid transparent;
+	height: 30%；
+}
+.user-avar{
+	width: 40px;
+	height: 40px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.pull-right{
+	margin-top: 10px;;
+	margin-right: 10%;
 }
 
-.scroll-pane
+.chat-panel
 {
     height: 500px;
-    overflow: auto;
+	margin-bottom: 0px;
+    overflow-y: auto;
 }
 
 .chat-body{
 	height: 420px;
-	overflow-y: scroll;
+	overflow-y:visible;
 }
+
+.chat-panel-item > p{
+	width: 30px;
+}
+
+
+.chat-avar{
+	width: 30px;
+	height: 30px;
+	margin-left: 2px;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+.list-group-item{
+	padding-bottom: 0px;
+	background-color:rgb(50,50,50);
+}
+
+.list-group-item : hover{
+	color: red;
+}
+
+/*chat friend name*/
+.list-inline > li > p{
+	padding-left: 40%;
+	color: #fff;
+}
+.list-inline > li > small{
+	padding-left: 100%;
+	color: #fff;
+}
+
+.nav-tabs > li.active > a{
+          color: #555555;
+          cursor: default;
+          background-color: rgb(60,60,60);
+          border: 1px solid transparent;
+          border-bottom-color: transparent;
+}
+
+.nav-tabs > li > a:hover{
+          color: #555555;
+          cursor: default;
+          background-color: rgb(60,60,60);
+          border: 1px solid transparent;
+          border-bottom-color: transparent;
+}
+
+
+.nav-tabs > li.active > a:focus {
+          color: #fff;
+          cursor: default;
+          background-color: rgb(60,60,60);
+          border: 1px solid transparent;
+          border-bottom-color: transparent;
+}
+
+td{
+	font-size: 15px;
+	color: #fff;
+	font-weight:500;
+}
+
+.tr{
+	height: 20px;
+}
+
+.table-hover{
+	padding-bottom: 0px;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/

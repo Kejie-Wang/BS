@@ -73,7 +73,7 @@ html,body {
 }
 .login-title {
 	padding: 20px 10px;
-	background-color: rgba(31, 164, 207, .6);
+	background-color:  rgb(100, 185, 60);
 	border-top-left-radius: 25px;
 	border-top-right-radius: 25px;
 }

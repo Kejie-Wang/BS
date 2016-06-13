@@ -24,6 +24,9 @@
 	<link rel="stylesheet" type="text/css" href="css/login.css" >
 
 	<script type="text/javascript" language="javascript">
+		/*
+		*login submit
+		*/
 		$(document).ready(function(){
 			$("#submit").click(function(){
 				$.post("/auth/login", {
@@ -34,7 +37,6 @@
 					if(msg['success']){
 						window.location.href = msg.url;
 					}else{
-						window.location.href = "/index";
 						document.getElementById("warning").innerText = "Incorrect username or password.";
 					}
 				});
@@ -74,16 +76,16 @@
 			</div>
 			<div class="form-group form-actions">
 				<div class="col-xs-4 col-xs-offset-4 ">
-					<button id="submit" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-off"></span> Login</button>
+					<button id="submit" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-off"></span> Login</button>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-xs-6 link">
-					<p class="text-center remove-margin"><small>Forget Password？</small> <a href="javascript:void(0)" ><small>找回</small></a>
+					<p class="text-center remove-margin"><small></small> <a href="javascript:void(0)" ><small>Forget Password？</small></a>
 					</p>
 				</div>
 				<div class="col-xs-6 link">
-					<p class="text-center remove-margin"><small>New to Connection?</small> <a href="javascript:void(0)" ><small>Register</small></a>
+					<p class="text-center remove-margin"><small>New to Connection?</small> <a href="/register"><small>Register</small></a>
 					</p>
 				</div>
 			</div>
