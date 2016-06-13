@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0" />
+	<title>
+		login
+	</title>
+
+	<link rel="stylesheet" href="jquery/jquery-ui.min.css">
+	<link rel="stylesheet" href="jquery/jquery-ui.theme.css">
+	<link rel="stylesheet" href="jquery/jquery-ui.theme.min.css">
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+
+	<script type="text/javascript" src="jquery/external/jquery/jquery.js"></script>
+	<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="css/register.css" >
+
+	<script type="text/javascript" language="javascript">
+		$(document).ready(function(){
+			$("#register").click(function(){
+				var username= document.getElementById("username").value;
+				var email=document.getElementById("email").value
+				var password1 =document.getElementById("first-password").value;
+				var password2 =document.getElementById("second-password").value;
+				console.log(username, email, password1, password2);
+				if(username.length == 0){
+					document.getElementById("warning").innerText = "The username can not be empty!";
+					return;
+				}
+				if(email.length == 0){
+					document.getElementById("warning").innerText = "The email can not be empty!";
+					return;
+				}
+				if(password1.length == 0){
+					document.getElementById("warning").innerText = "The password1 can not be empty!";
+					return;
+				}
+				if(password2.length == 0){
+					document.getElementById("warning").innerText = "The password2 can not be empty!";
+					return;
+				}
+				if(password1 != password2){
+					document.getElementById("warning").innerText = "The passwords you typed do not match.";
+					window.location.href = "/register";
+					return;
+				}
+				$.post("/auth/register", {
+					"username": document.getElementById("username").value,
+					"email":document.getElementById("email").value,
+					"password": document.getElementById("first-password").value
+				}, function(msg){
+					console.log(msg);
+					if(msg['success']){
+						window.location.href = msg.url;
+					}else{
+						document.getElementById("warning").innerText = msg.err;
+					}
+				});
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+<div class="box">
+		<div class="register-box">
+			<div class="register-title text-center">
+				<h1><small>Join Message</small></h1>
+			</div>
+			<div class="login-content ">
+			<div class="form">
+			<!-- <form action="/auth/login" method="post"> -->
+			<div class="form-group">
+				<div class="col-xs-12  ">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+						<input type="text" id="username" name="username" class="form-control" placeholder="Username">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12  ">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+						<input type="text" id="email" name="first-password" class="form-control" placeholder="Email">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12  ">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+						<input type="text" id="first-password" name="first-password" class="form-control" placeholder="Password">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12  ">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+						<input type="text" id="second-password" name="second-password" class="form-control" placeholder="Enter the password again">
+					</div>
+				</div>
+			</div>
+			<div>
+				<p align="center" id="warning"></p>
+			</div>
+			<div class="form-group form-actions">
+				<div class="col-xs-4 col-xs-offset-4 ">
+					<button id="register" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-off"></span> Create an account</button>
+				</div>
+			</div>
+			<!-- </form> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+
+</html>
