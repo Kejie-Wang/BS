@@ -27,7 +27,18 @@ exports.buildAFriend = function(friendName1, friendName2, friendList1, friendLis
 					+"\'" + friendList2 + "\',"
 					+"now());";
 	console.log(insertSql);
-	client.query(insertSql, callback);
+	client.query(insertSql, (err, vals)=>{
+		if(err){
+			callback(err, null);
+		}
+		var insertSql = "INSERT INTO Friend VALUES("
+						+"\'" + friendName2 + "\',"
+						+"\'" + friendName1 + "\',"
+						+"\'" + friendList2 + "\',"
+						+"\'" + friendList1 + "\',"
+						+"now());";
+		client.query(insertSql, callback);
+	});
 }
 
 exports.deleteAFriend = function(friendName1, friendName2, callback){
@@ -43,7 +54,7 @@ exports.deleteAFriend = function(friendName1, friendName2, callback){
 				+ "friendName2=" + "\'" + friendName2 + "\'"
 }
 
-exports.checkIsAFriend = function(frinedName1, friendName2, callback){
+exports.checkIsAFriend = function(friendName1, friendName1, callback){
 	if(friendName2 < friendName1){
 		var tmp;
 		tmp = friendName1;
@@ -52,8 +63,16 @@ exports.checkIsAFriend = function(frinedName1, friendName2, callback){
 	}
 
 	var selectSql = "SELECT * FROM Friend WHERE "
-					+ "frinedName1=\'" + friendName1 + "\' AND "
-				 	+ "friendName2=\'" + friendName2 + "\';"
+					+ "friendName1=\'" + friendName1 + "\' AND "
+				 	+ "friendName1=\'" + friendName2 + "\';"
+
+	client.query(selectSql, callback);
+}
+
+exports.getAllFriend = function(userName, callback){
+	var selectSql = "SELECT friendName1, friendList2, avatar "
+					+ "FROM (Friend JOIN User ON friendName1 = userName)"
+					+ "WHERE friendName2 = \'" + userName + "\';";
 
 	client.query(selectSql, callback);
 }

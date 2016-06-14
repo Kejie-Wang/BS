@@ -1,10 +1,3 @@
-$(document).ready(function(){
-	$("a.accordion-toggle").click(function(){
-		$(this).find("span").toggleClass("glyphicon-chevron-right");
-		$(this).find("span").toggleClass("glyphicon-chevron-down");
-	});
-});
-
 /*set the tab color*/
 $(document).ready(function(){
 	$(".nav-tabs li a").click(function(){
@@ -22,6 +15,54 @@ $(document).ready(function(){
 		console.log($("#user-name"));
 		$("#user-name").text(data.userName);
 	});
+});
+
+function getListName(listName, userName){
+	var len = userName.length;
+	return listName.substr(len);
+}
+$(document).ready(function(){
+	$.get("/getAllList", function(data, status){
+		var list = data.results;
+		for(var i=0;i<list.length;i++)
+		{
+			var $listDiv = $("<div class=\"accordion-heading\">"
+				+ "<a class=\"accordion-toggle list-name\" data-toggle=\"collapse\" data-parent=\"#accordion2\" href=\"#" + list[i].listName + "List\">"
+				+ "<span class=\"glyphicon glyphicon-chevron-right\"></span>"
+				+ list[i].listName
+				+ "</a>"
+				+ "</div>"
+				+ "<div id=\"" + list[i].listName + "List\" class=\"accordion-body collapse\" style=\"height: 0px; \">"
+				+	"<div class=\"accordion-inner\">"
+				+		"<table class=\"table table-hover\">"
+				+		  "<tbody>"
+				+		  "</tbody>"
+				+		"</table>"
+				+	"</div>"
+				+ "</div>");
+			$("#contacts-list-group").append($listDiv);
+		}
+		$.get("/getFriendInfo", function(data, status){
+			console.log(data);
+			var list = data.results;
+			for(var i=0;i<list.length;i++)
+			{
+				var src = list[i].avatar;
+				var userName = list[i].friendName1;
+				var listName = getListName(list[i].friendList2, userName);
+				var $newRow = "<tr><td><img class=\"img-circle chat-avar\", src=\"" + src + "\" width=\"100%\"></td>"
+							+ "<td><p>" + userName + "</p></td></tr></td>";
+				$("#" + listName + "List div table tbody").append($newRow);
+				// $("#friendList div table tr:last").after(newRow);
+			}
+			$("a.accordion-toggle").click(function(){
+				$(this).find("span").toggleClass("glyphicon-chevron-right");
+				$(this).find("span").toggleClass("glyphicon-chevron-down");
+			});
+		});
+	});
+
+
 });
 
 
@@ -55,9 +96,6 @@ $(document).ready(function(){
 		}, function(data){
 			if(data.user != null){
 				$("#searchAFriendAvatar").attr("src", data.user.avatar);
-				// $("#searchAFriendGetUserName").text(data.user.userName);
-				// var userName = document.getElementById("searchAFriendGetUserName").value;
-				// console.log(userName);
 				$("#searchAFriendPanel").css("display", "inline");
 			}else{
 				$("#searchAFriendPanel").css("display", "none");
@@ -73,19 +111,24 @@ $(document).ready(function(){
 		console.log(userName);
 		$("#searchModal").modal("hide");
 		$("#addAFriendModal").modal("show");
-		$("#send").click(function(){
-			$.post("/requestAddAFriend", {
-			"userName": userName,
-			"info":  document.getElementById("sendFriendRequest").value
-			}, function(data){
 
-			});
-		});
 	});
 });
 
 $(document).ready(function(){
-
+	$("#send").click(function(){
+		var userName = document.getElementById("searchAFriendUserName").value;
+		$.post("/requestAddAFriend", {
+		"userName": userName,
+		"info":  document.getElementById("sendFriendRequest").value
+		}, function(data){
+			//add the friend into the list
+			// var src = $("#searchAFriendAvatar").attr("src");
+			// var newRow = "<td><img class=\"img-circle chat-avar\", src=\"" + src + "\" width=\"100%\"></td>"
+			// 			+ "<td><p>" + userName + "</p></td></tr>";
+			// $("#friendList div table tr:last").after(newRow);
+		});
+	});
 });
 
 

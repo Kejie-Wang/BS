@@ -7,30 +7,13 @@
 */
 var LISTIDLENGTH = 50;
 
+exports.getAllList = function(userName, callback){
+	var selectSql = "SELECT listName, userName FROM List WHERE userName=\'" + userName + "\';";
+	console.log("In get all list, sql=", selectSql);
+	client.query(selectSql, callback);
+}
+
 exports.addAList= function(userName, listName, callback){
-	// var selectSql = "SELECT MAX(listID) FROM List";
-	// client.query(selectSql, (err, res)=>{
-	// 	if(err){
-	// 		callback(err, null);
-	// 	}
-	// 	else {
-	// 		var maxID = res[0]["MAX(listID)"];
-	// 		var newID=0;
-	// 		if(maxID!=null && typeof(maxID)!="undefined"){
-	// 			newID = Number(maxID) + 1;
-	// 		}
-	// 		while(newID.length < LISTIDLENGTH)
-	// 			newID = '0' + newID;
-	// 		var insertSql = "INSERT INTO LIST VALUES("
-	// 			+ "\'" + newID + "\', "
-	// 			+ "\'" + listName + "\', "
-	// 			+ "\'" + username + "\');";
-	// 		client.query(insertSql, (err, res)=>{
-	// 			callback(err, res);
-	// 		});
-	// 	}
-	// });
-	console.log("fuck you son of bitch");
 	var newID = userName + listName;
 	var insertSql = "INSERT INTO LIST VALUES("
 		+ "\'" + newID + "\', "
@@ -40,7 +23,6 @@ exports.addAList= function(userName, listName, callback){
 	client.query(insertSql, (err, res)=>{
 		callback(err, res);
 	});
-
 }
 
 exports.deleteAList = function(username, listName, callback){
@@ -49,9 +31,4 @@ exports.deleteAList = function(username, listName, callback){
 					+"userName=\'" + username + "\';";
 
 	client.query(deleteSql, callback);
-}
-
-exports.getAllList = function(userName, callback){
-	var selectSql = "SELECT listName FROM List WHERE listName=\'" + listName + "\';";
-	client.query(selectSql, callback);
 }

@@ -99,6 +99,27 @@ router.get('/getUserInfo', function(req, res, next){
 	});
 });
 
+router.get('/getAllList', function(req, res, next){
+	var userName = req.cookies.userName;
+	console.log(userName);
+	listMagager.getAllList(userName, (err, vals)=>{
+		if(err){
+			console.log(err);
+		}
+		res.send({"results": vals});
+	});
+});
+
+router.get('/getFriendInfo', function(req, res, next){
+	var userName = req.cookies.userName;
+	friendManager.getAllFriend(userName, (err, vals)=>{
+		if(err){
+			console.log(err);
+		}
+		res.send({"results": vals});
+	});
+});
+
 router.post('/userSearch', function(req, res, next){
 	var userName = req.body.userName;
 	console.log("In userSearch post userName = ", userName);
@@ -123,7 +144,7 @@ router.get('/checkIsAFriend', function(req, res, next){
 			console.log(err);
 		}
 		if(vals.length > 0)
-			res.send({"isFrined": true});
+			res.send({"isFriend": true});
 		else{
 			res.send({"isFriend": false});
 		}
