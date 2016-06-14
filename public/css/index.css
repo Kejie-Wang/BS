@@ -42,7 +42,7 @@ body {
 }
 
 .nav-tabs > li{
-	width: 33%;
+	width: 50%;
 	padding: 5px;
 	margin-right: 0px;
 	margin-right: 0px;
@@ -244,7 +244,9 @@ td{
 	margin-right: 5%
 }
 
-
+.list-name{
+	color: #fff;
+}
 
 
 

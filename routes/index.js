@@ -4,10 +4,11 @@ var router = express.Router();
 var userManager = require("../db/userManager");
 var listMagager = require("../db/listManager");
 var messageMagager = require("../db/messageManager");
+var friendManager = require("../db/friendManager");
 
 // var cookie = require('cookie');
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next){
   res.render('home');
 });
 
@@ -22,18 +23,26 @@ router.get('/register', function(req, res, next){
 router.post('/auth/register', function(req, res, next){
 	console.log("req.body", req.body);
 	userManager.createAnUser(req.body, (err, vals)=>{
-		var msg={
-			success:true,
-			err: "",
-			url:"/index"
-		};
 		if(err){
-			msg['err'] = err;
-			msg['success'] = false;
-			msg['url'] = '/register';
+			console.log(err);
 		}
-		console.log("msg", msg);
-		res.send(msg);
+		listMagager.addAList(req.body.userName, "MyFriend", (err, vals)=>{
+			if(err){
+				console.log(err);
+			};
+			var msg={
+				success:true,
+				err: "",
+				url:"/login"
+			};
+			if(err){
+				msg['err'] = err;
+				msg['success'] = false;
+				msg['url'] = '/register';
+			}
+			console.log("msg", msg);
+			res.send(msg);
+		});
 	});
 });
 
@@ -49,8 +58,21 @@ router.post('/auth/login', function(req, res, next){
 		if(users.length == 0)
 			res.send({'success': false});
 		else
-			res.send({'success': true, 'url': '/index'});
+		{
+			userManager.setSateVal(userName, 1, (err, vals)=>{
+				if(err){
+					console.log(err);
+				}
+				res.send({'success': true, 'url': '/index'});
+			});
+		}
 	});
+});
+
+router.get('/auth/logout', function(req, res, next){
+	res.clearCookie('userName');
+	res.clearCookie('password');
+	res.send({});
 });
 
 router.get('/index', function(req, res, next){
@@ -73,26 +95,30 @@ router.get('/getUserInfo', function(req, res, next){
 		if(err){
 			console.log(err);
 		}
-		res.send({'userName': userName, "avatar": vals["avatar"]});
+		res.send({'userName': userName, 'avatar': vals[0].avatar});
 	});
 });
 
-router.get('/userSearch', function(req, res, next){
+router.post('/userSearch', function(req, res, next){
 	var userName = req.body.userName;
-
+	console.log("In userSearch post userName = ", userName);
 	userManager.userSearch(userName, (err, vals)=>{
 		if(err){
 			console.log(err);
 		}
-		res.send({"userName": vals});
+		if(vals.length > 0)
+			res.send({"user": vals[0]});
+		else{
+			res.send({"user": null});
+		}
 	});
 });
 
-router.get('/checkIsAFriend', function(req, res, next)={
+router.get('/checkIsAFriend', function(req, res, next){
 	var userName1 = req.body.userName1;
 	var userName2 = req.body.userName2;
 
-	friendManager.checkIsAFriend(userName1, userName2, (err, vals)={
+	friendManager.checkIsAFriend(userName1, userName2, (err, vals)=>{
 		if(err){
 			console.log(err);
 		}
@@ -104,24 +130,39 @@ router.get('/checkIsAFriend', function(req, res, next)={
 	})
 });
 
-router.get('/addAFriend', function(req, res, next){
-	var userName1 = req.body.userName1;
-	var userName2 = req.body.userName2;
-	var listName1 = req.body.listName1;
-	var listName2 = req.body.listName2;
-	if(typeof(listName1) == undefined){
-		listName1 = "MyFriend";
-	}
-	if(typeof(listName2) == undefined){
-		listName2 = "MyFriend";
-	}
-	friendManager.buildAFriend(userName1, userName2, listName1, listName2, (err, vals)=>{
+router.post('/requestAddAFriend', function(req, res, next){
+	var from = req.cookies.userName;
+	var to = req.body.userName;
+	var info = req.body.info;
+	console.log(req.body, "from", from, "to", to, "info", info);
+	var listName1="MyFriend", listName2="MyFriend";
+	friendManager.buildAFriend(from, to, listName1, listName2, (err, vals)=>{
 		if(err){
 			console.log(err);
 		}
+		console.log("bbbbbbbbbbbbb");
 		res.send({});
 	});
 });
+
+// router.get('/addAFriend', function(req, res, next){
+// 	var userName1 = req.body.userName1;
+// 	var userName2 = req.body.userName2;
+// 	var listName1 = req.body.listName1;
+// 	var listName2 = req.body.listName2;
+// 	if(typeof(listName1) == undefined){
+// 		listName1 = "MyFriend";
+// 	}
+// 	if(typeof(listName2) == undefined){
+// 		listName2 = "MyFriend";
+// 	}
+// 	friendManager.buildAFriend(userName1, userName2, listName1, listName2, (err, vals)=>{
+// 		if(err){
+// 			console.log(err);
+// 		}
+// 		res.send({});
+// 	});
+// });
 
 router.get('/deleteAFriend', function(req, res, next){
 	var userName1 = req.body.userName1;
