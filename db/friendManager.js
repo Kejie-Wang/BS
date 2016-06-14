@@ -7,7 +7,9 @@
 
 client = require("./connPool");
 
-exports.buildAFriend(friendName1, friendName2, friendList1, friendList2, callback){
+exports.buildAFriend = function(friendName1, friendName2, friendList1, friendList2, callback){
+	friendList1 = friendName1 + friendList1;
+	friendList2 = friendName2 + friendList2;
 	if(friendName2 < friendName1){
 		var tmp;
 		tmp = friendName1;
@@ -24,10 +26,11 @@ exports.buildAFriend(friendName1, friendName2, friendList1, friendList2, callbac
 					+"\'" + friendList1 + "\',"
 					+"\'" + friendList2 + "\',"
 					+"now());";
-	client(insertSql, callback);
+	console.log(insertSql);
+	client.query(insertSql, callback);
 }
 
-exports.deleteAFriend(friendName1, friendName2, callback){
+exports.deleteAFriend = function(friendName1, friendName2, callback){
 	if(friendName2 < friendName1){
 		var tmp;
 		tmp = friendName1;
@@ -40,7 +43,7 @@ exports.deleteAFriend(friendName1, friendName2, callback){
 				+ "friendName2=" + "\'" + friendName2 + "\'"
 }
 
-exports.checkIsAFriend(frinedName1, friendName2, callback){
+exports.checkIsAFriend = function(frinedName1, friendName2, callback){
 	if(friendName2 < friendName1){
 		var tmp;
 		tmp = friendName1;

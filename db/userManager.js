@@ -158,15 +158,15 @@ exports.setSateVal = function(userName, state, callback){
 }
 
 exports.getAvartar = function(userName, callback){
-	var sql = "SELECT avatar FROM User;";
+	var sql = "SELECT avatar FROM User WHERE userName=\'" + userName + "\';";
 
 	client.query(sql, callback);
 }
 
 exports.userSearch = function(userName, callback){
-	var sql = "SELECT userName FROM User WHERE userName LIKE \'%" + userName + "%\';";
-
-	client.query(sql. callback);
+	var sql = "SELECT userName, avatar FROM User WHERE userName =\'" + userName + "\';";
+	console.log("in user search sql=", sql);
+	client.query(sql, callback);
 }
 
 

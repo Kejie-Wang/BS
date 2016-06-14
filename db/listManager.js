@@ -7,29 +7,40 @@
 */
 var LISTIDLENGTH = 50;
 
-exports.addAList= function(username, listName, callback){
-	var selectSql = "SELECT MAX(listID) FROM List";
-	client.query(selectSql, (err, res)=>{
-		if(err){
-			callback(err, null);
-		}
-		else {
-			var maxID = res[0]["MAX(listID)"];
-			var newID=0;
-			if(maxID!=null && typeof(maxID)!="undefined"){
-				newID = Number(maxID) + 1;
-			}
-			while(newID.length < LISTIDLENGTH)
-				newID = '0' + newID;
-			var insertSql = "INSERT INTO LIST VALUES("
-				+ "\'" + newID + "\', "
-				+ "\'" + listName + "\', "
-				+ "\'" + username + "\');";
-			client.query(insertSql, (err, res)=>{
-				callback(err, res);
-			});
-		}
+exports.addAList= function(userName, listName, callback){
+	// var selectSql = "SELECT MAX(listID) FROM List";
+	// client.query(selectSql, (err, res)=>{
+	// 	if(err){
+	// 		callback(err, null);
+	// 	}
+	// 	else {
+	// 		var maxID = res[0]["MAX(listID)"];
+	// 		var newID=0;
+	// 		if(maxID!=null && typeof(maxID)!="undefined"){
+	// 			newID = Number(maxID) + 1;
+	// 		}
+	// 		while(newID.length < LISTIDLENGTH)
+	// 			newID = '0' + newID;
+	// 		var insertSql = "INSERT INTO LIST VALUES("
+	// 			+ "\'" + newID + "\', "
+	// 			+ "\'" + listName + "\', "
+	// 			+ "\'" + username + "\');";
+	// 		client.query(insertSql, (err, res)=>{
+	// 			callback(err, res);
+	// 		});
+	// 	}
+	// });
+	console.log("fuck you son of bitch");
+	var newID = userName + listName;
+	var insertSql = "INSERT INTO LIST VALUES("
+		+ "\'" + newID + "\', "
+		+ "\'" + listName + "\', "
+		+ "\'" + userName + "\');";
+	console.log(insertSql);
+	client.query(insertSql, (err, res)=>{
+		callback(err, res);
 	});
+
 }
 
 exports.deleteAList = function(username, listName, callback){
