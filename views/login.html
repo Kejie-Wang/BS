@@ -30,14 +30,14 @@
 		$(document).ready(function(){
 			$("#submit").click(function(){
 				$.post("/auth/login", {
-					userName: document.getElementById("username").value,
+					userName: document.getElementById("userName").value,
 					password: document.getElementById("password").value
 				}, function(msg){
 					console.log(msg);
 					if(msg['success']){
 						window.location.href = msg.url;
 					}else{
-						document.getElementById("warning").innerText = "Incorrect username or password.";
+						document.getElementById("warning").innerText = "Incorrect userName or password.";
 					}
 				});
 			});
@@ -59,7 +59,7 @@
 				<div class="col-xs-12  ">
 					<div class="input-group">
 						<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-						<input type="text" id="username" name="username" class="form-control" placeholder="Username">
+						<input type="text" id="userName" name="userName" class="form-control" placeholder="userName">
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 				<div class="col-xs-12  ">
 					<div class="input-group">
 						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-						<input type="text" id="password" name="password" class="form-control" placeholder="Password">
+						<input type="password" id="password" name="password" class="form-control" placeholder="Password">
 					</div>
 				</div>
 			</div>

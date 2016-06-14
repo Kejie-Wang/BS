@@ -26,7 +26,7 @@
 
 
 	<link href="css/index.css" rel="stylesheet">
-
+	<link href="css/message.css" rel="stylesheet">
 	<link href="/image/logo.ico" rel="shortcut icon">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,30 +34,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<script type="text/javascript" language="javascript">
-		$(document).ready(function(){
-			$("a.accordion-toggle").click(function(){
-				$(this).find("span").toggleClass("glyphicon-chevron-right");
-				$(this).find("span").toggleClass("glyphicon-chevron-down");
-			});
-		});
-
-		/*set the tab color*/
-		$(document).ready(function(){
-			$(".nav-tabs li a").click(function(){
-				$(".nav-tabs li a").css("color", "rgb(255, 255, 255)");
-				$(this).css("color", "rgb(100, 185, 60)");
-			});
-		});
-
-		$(document).ready(function(){
-			$.get("/getUserInfo", function(data, status){
-
-			});
-
-		});
-
-	</script>
+	<script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body>
@@ -83,9 +60,9 @@
 								<span class="glyphicon glyphicon-bell"></span>
 						   </a>
 						   <ul class="dropdown-menu" role="menu">
-							   <a id="profile" href="#"><li>profile</li></a>
-							   <a id="setting" href="#"><li>setting</li></a>
-							   <a id="logout"  href="#"><li>logout</li></a>
+							   <!-- <li><a id="profile" href="#">profile</a></li>
+							   <li><a id="setting" href="#">setting</a></li>
+							   <li><a id="logout"  href="#">logout</a></li> -->
 						   </ul>
 					   </div>
                     </li>
@@ -95,26 +72,26 @@
 								<span class="glyphicon glyphicon-plus"></span>
 						   </a>
 						   <ul class="dropdown-menu" role="menu">
-							   <a href="#"><li>profile</li></a>
-							   <a href="#"><li>setting</li></a>
-							   <a href="#"><li>logout</li></a>
+							   <!-- <li><a id="profile" href="#">profile</a></li>
+							   <li><a id="setting" href="#">setting</a></li>
+							   <li><a id="logout"  href="#">logout</a></li> -->
 						   </ul>
 					   </div>
                     </li>
 					<li class="active">
 						<div class="dropdown">
 							<a type="button" class="btn dropdown-toggle" id="setting" data-toggle="dropdown">
-								<img class="img-circle nav-user-avar" src="/avatar/Jack.JPG">
+								<img class="img-circle nav-user-avar" src="">
 								<span class="caret"></span>
 						   </a>
 						   <ul class="dropdown-menu" role="menu">
-							   <a href="#"><li>profile</li></a>
-							   <a href="#"><li>setting</li></a>
-							   <a href="#"><li>logout</li></a>
+							   <li><a id="profile" href="#">profile</a></li>
+ 							  <li><a id="setting" href="#">setting</a></li>
+ 							  <li><a id="logout"  href="#">logout</a></li>
 						   </ul>
 					   </div>
 					</li>
-                </ul>
+             </ul>
             </div>
 		</div>
 		<!-- /.container -->
@@ -126,17 +103,95 @@
 				<div class="panel" margin-left="10%" style="background-color:rgb(50,50,50)">
 					<div class="panel-title">
 						<img src="/avatar/jack.JPG" class="img-circle user-avar" width="40px" height="40px">
-						<small style="color:#fff;">Jack</small>
-						<div class="dropdown pull-right">
-							<a class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;">
-								<span class="glyphicon glyphicon-align-justify"></span>
-								<span class="caret"></span>
+						<small style="color:#fff;" id="user-name"></small>
+						<div class="pull-right">
+							<a href="#search" data-toggle="modal" data-target="#searchModal" style="color:#fff;">
+								<span class="glyphicon glyphicon-search" style="color=#fff"> </span>
 							</a>
-						   <ul class="dropdown-menu" role="menu">
-							   <a id="addAFriend" href="#"><li>Add a friend</li></a>
-							   <a id="addAList" href="#"><li>Add a list</li></a>
-							   <a href="#"><li></li></a>
-						   </ul>
+							<div class="modal fade" id="searchModal" tabindex="-1" role="dialog"
+							   aria-labelledby="myModalLabel" aria-hidden="true">
+							   <div class="modal-dialog">
+							      <div class="modal-content">
+							         <div class="modal-header">
+							            <button type="button" class="close"
+							               data-dismiss="modal" aria-hidden="true">
+							                  &times;
+							            </button>
+							            <h4 class="modal-title" id="myModalLabel">
+							               search a friend
+							            </h4>
+							         </div>
+
+									 <div class="input-group">
+								         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+								         <input type="text" class="form-control" id="searchAFriendUserName" placeholder="username">
+								     </div>
+									 <div class="panel" id="searchAFriendPanel" style="margin-top:50px; border:1px solid; display:none;">
+										 <ul class="list-inline">
+											 <li style="margin-bottom:10px; padding-left:40%;">
+												 <img class="img-circle" id="searchAFriendAvatar" src="" style="height:50px; width:50px;">
+											 </li>
+											 <li style="padding-top:10px;">
+												 <div>
+												 	<!-- <p id="searchAFriendGetUserName" display="none"></p> -->
+												 	<a type="button" class="btn btn-primary" id="searchAFriendAdd" >Add</a>
+											 	</div>
+											 </li>
+										 </ul>
+									 </div>
+							         <div class="modal-footer">
+							            <button type="button" class="btn btn-default"
+							               data-dismiss="modal">cancel
+							            </button>
+							            <button type="button" class="btn btn-primary" id="search">
+							               search
+							            </button>
+							         </div>
+							      </div><!-- /.modal-content -->
+								</div><!-- /.modal -->
+							</div>
+
+							<div class="modal fade" id="addAFriendModal" tabindex="-1" role="dialog"
+							   aria-labelledby="myModalLabel" aria-hidden="true">
+							   <div class="modal-dialog">
+							      <div class="modal-content">
+							         <div class="modal-header">
+							            <button type="button" class="close"
+							               data-dismiss="modal" aria-hidden="true">
+							                  &times;
+							            </button>
+							            <h4 class="modal-title" id="myModalLabel">
+							               add a friend
+							            </h4>
+							         </div>
+
+									 <div class="input-group">
+								         <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+								         <input type="text" class="form-control" id="sendFriendRequest" placeholder="Send friend request">
+								     </div>
+							         <div class="modal-footer">
+							            <button type="button" class="btn btn-default"
+							               data-dismiss="modal">cancel
+							            </button>
+							            <button type="button" class="btn btn-primary" id="send">
+							               send
+							            </button>
+							         </div>
+							      </div><!-- /.modal-content -->
+								</div><!-- /.modal -->
+							</div>
+
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;">
+									<span class="glyphicon glyphicon-align-justify"></span>
+									<span class="caret"></span>
+								</a>
+							    <ul class="dropdown-menu" role="menu">
+								   <a id="addAFriend" href="#"><li>Add a friend</li></a>
+								   <a id="addAList" href="#"><li>Add a list</li></a>
+								   <a href="#"><li></li></a>
+							    </ul>
+					   		</div>
 					   </div>
 					</div>
 					<ul id="tab" class="nav nav-tabs" >
@@ -150,11 +205,6 @@
   							  <span class="glyphicon glyphicon-user" style="color=#fff"> </span>
   						  	</a>
 					   	</li>
-					   	<li>
-							<a href="#search" data-toggle="tab" style="color:#fff;">
-								<span class="glyphicon glyphicon-search" style="color=#fff"> </span>
-							</a>
-					  	</li>
 					</ul>
 
 					<!-- chats and contacts tab content begin -->
@@ -179,37 +229,6 @@
 							          <td><p>Mike</p></td>
 							          <td><small>Yesterday</small></td>
 							        </tr>
-									<tr>
-							          <td><img class="img-circle chat-avar", src="/avatar/Lisa.JPG" width="100%"></td>
-							          <td><p>Mike</p></td>
-							          <td><small>Yesterday</small></td>
-							        </tr>
-									<tr>
-							          <td><img class="img-circle chat-avar", src="/avatar/lily.JPG" width="100%"></td>
-							          <td><p>Lily<p></td>
-							          <td><small>Yesterday</small></td>
-							        </tr>
-									<tr>
-							          <td><img class="img-circle chat-avar", src="/avatar/Mike.JPG" width="100%"></td>
-							          <td><p>Mike</p></td>
-							          <td><small>Yesterday</small></td>
-							        </tr>
-									<tr>
-							          <td><img class="img-circle chat-avar", src="/avatar/James.JPG" width="100%"></td>
-							          <td><p>Mike</p></td>
-							          <td><small>Yesterday</small></td>
-							        </tr>
-									<tr>
-							          <td><img class="img-circle chat-avar", src="/avatar/Lisa.JPG" width="100%"></td>
-							          <td><p>Mike</p></td>
-							          <td><small>Yesterday</small></td>
-							        </tr>
-									<tr>
-							          <td><img class="img-circle chat-avar", src="/avatar/lily.JPG" width="100%"></td>
-							          <td><p>Lily<p></td>
-							          <td><small>Yesterday</small></td>
-							        </tr>
-
 							      </tbody>
 							    </table>
 							</div>
@@ -220,132 +239,170 @@
 						<!-- contancts tab begin -->
 						<div class="tab-pane fade" id="contacts">
 				            <div class="panel-group contacts-panel" id="accordion2">
-								<!-- <table class="table table-hover">
-								  <tbody>
-									  <tr>
-										  <td>
-											  <div class="panel panel-default">
-			  				                    <div class="panel-heading" data-toggle="collapse"
-			  				                        data-parent="#accordion2" href="#collapseOne">
-			  				                        <a class="accordion-toggle">Java</a>
-			  				                    </div>
-			  				                    <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
-			  				                        <div class="panel-body">
-			  				                            <ul class="nav nav-pills nav-stacked">
-			  				                                <li><a href="#">Java基础</a></li>
-			  				                                <li><a href="#">Java面向对象</a></li>
-			  				                            </ul>
-			  				                        </div>
-			  				                    </div>
-			  				                </div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="panel panel-default">
-												<div class="panel-heading" data-toggle="collapse"
-								                    data-parent="#accordion2" href="#collapseTwo">
-								                    <a class="accordion-toggle">数据库</a>
-								                </div>
-								                <div id="collapseTwo" class="panel-collapse collapse"
-								                    style="height: 0px;">
-								                	<div class="panel-body">
-								                        <ul class="nav nav-pills nav-stacked">
-								                            <li><a href="#">SQL基础</a></li>
-								                            <li><a href="#">Oracle</a></li>
-								                        </ul>
-								                    </div>
-								                </div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table> -->
+								<div class="accordion" id="accordion2">
+								   <div class="accordion-group">
+									 	<div class="accordion-heading">
+									   		<a class="accordion-toggle list-name" data-toggle="collapse" data-parent="#accordion2" href="#friendList">
+												<span class="glyphicon glyphicon-chevron-right"></span>
+												MyFriend
+									   		</a>
+									 	</div>
+									 	<div id="friendList" class="accordion-body collapse" style="height: 0px; ">
+									   		<div class="accordion-inner">
+												<table class="table table-hover">
+												  <tbody>
+													<tr>
+													  	<td><img class="img-circle chat-avar", src="/avatar/lily.JPG" width="100%"></td>
+													  	<td><p>Lily</p></td>
+														<!-- <td><p id="state">[Online]</p></td> -->
+													</tr>
+													<tr>
+													  	<td><img class="img-circle chat-avar", src="/avatar/Mike.JPG" width="100%"></td>
+													  	<td><p>Mike</p></td>
+														<!-- <td><p id="state">[Online]</p></td> -->
+													</tr>
+												  </tbody>
+												</table>
+									   		</div>
+									 	</div>
+								   </div>
 
-							<div class="accordion" id="accordion2">
-							   <div class="accordion-group">
-								 	<div class="accordion-heading">
-								   		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#friendList">
-											<span class="glyphicon glyphicon-chevron-right"></span>
-											friend
-								   		</a>
-								 	</div>
-								 	<div id="friendList" class="accordion-body collapse" style="height: 0px; ">
-								   		<div class="accordion-inner">
-											<table class="table table-hover">
-											  <tbody>
-												<tr>
-												  	<td><img class="img-circle chat-avar", src="/avatar/lily.JPG" width="100%"></td>
-												  	<td><p>Lily</p></td>
-													<td><p id="state">[Online]</p></td>
-												</tr>
-												<tr>
-												  	<td><img class="img-circle chat-avar", src="/avatar/Mike.JPG" width="100%"></td>
-												  	<td><p>Mike</p></td>
-													<td><p id="state">[Online]</p></td>
-												</tr>
-											  </tbody>
-											</table>
-								   		</div>
-								 	</div>
-							   </div>
-
-							   <div class="accordion-group">
-								 	<div class="accordion-heading">
-								   		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#familyList">
-											<span class="glyphicon glyphicon-chevron-right"></span>
-											family
-								   		</a>
-								 	</div>
-								 	<div id="familyList" class="accordion-body collapse" style="height: 0px; ">
-								   		<div class="accordion-inner">
-											<table class="table table-hover">
-											  <tbody>
-												<tr>
-												  	<td><img class="img-circle chat-avar", src="/avatar/lily.JPG" width="100%"></td>
-												  	<td><p>Lily</p></td>
-													<td><p id="state">[Online]</p></td>
-												</tr>
-												<tr>
-												  	<td><img class="img-circle chat-avar", src="/avatar/Mike.JPG" width="100%"></td>
-												  	<td><p>Mike</p></td>
-													<td><p id="state">[Online]</p></td>
-												</tr>
-											  </tbody>
-											</table>
-								   		</div>
-								 	</div>
-							   </div>
-							 </div>
+								   <div class="accordion-group">
+									 	<div class="accordion-heading">
+									   		<a class="accordion-toggle list-name" data-toggle="collapse" data-parent="#accordion2" href="#familyList">
+												<span class="glyphicon glyphicon-chevron-right"></span>
+												family
+									   		</a>
+									 	</div>
+									 	<div id="familyList" class="accordion-body collapse" style="height: 0px; ">
+									   		<div class="accordion-inner">
+												<table class="table table-hover">
+												  <tbody>
+													<tr>
+													  	<td><img class="img-circle chat-avar", src="/avatar/lily.JPG" width="100%"></td>
+													  	<td><p>Lily</p></td>
+														<td><p id="state">[Online]</p></td>
+													</tr>
+													<tr>
+													  	<td><img class="img-circle chat-avar", src="/avatar/Mike.JPG" width="100%"></td>
+													  	<td><p>Mike</p></td>
+														<td><p id="state">[Online]</p></td>
+													</tr>
+												  </tbody>
+												</table>
+									   		</div>
+									 	</div>
+								   </div>
+								 </div>
+							</div>
 						</div>
-					</div>
 				</div>
 					<!-- chats and contacts tab content end -->
 				</div>
 			</div>
+
+			<!-- message windows begin-->
 			<div class="col-sm-8">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<p id="chatName" align="center"> 123</p>
+				<div class="panel">
+					<div class="panel-title">
+						<p><small>Mike</small></p
 					</div>
-					<div class="panel-body chat-body">
-						<div class="msg-list">
-						</div>
+					<div class="panel message-panel">
+				        <ul class="content-reply-box mg10">
+				            <li class="odd">
+				                <a class="user" href="#">
+									<img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
+									<span class="user-name">奔波儿灞</span>
+								</a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：00</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	为什么小鑫的名字里有三个金呢？
+				                    </div>
+				                </div>
+				            </li>
+				            <li class="even">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">灞波儿奔</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：10</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	他命里缺金，所以取名叫鑫，有些人命里缺水，就取名叫淼，还有些人命里缺木就叫森。
+				                    </div>
+				                </div>
+				            </li>
+				            <li class="odd">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">奔波儿灞</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：20</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	那郭晶晶命里缺什么？
+				                    </div>
+				                </div>
+				            </li>
+				            <li class="even">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">灞波儿奔</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：30</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	此处省略一百字...
+				                    </div>
+				                </div>
+				            </li>
+							<li class="odd">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">奔波儿灞</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：20</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	那郭晶晶命里缺什么？
+				                    </div>
+				                </div>
+				            </li>
+				            <li class="even">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">灞波儿奔</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：30</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	此处省略一百字...
+				                    </div>
+				                </div>
+				            </li>
+							<li class="odd">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">奔波儿灞</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：20</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	那郭晶晶命里缺什么？
+				                    </div>
+				                </div>
+				            </li>
+				            <li class="even">
+				                <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt=""><span class="user-name">灞波儿奔</span></a>
+				                <div class="reply-content-box">
+				                	<span class="reply-time">03-08 15：30</span>
+				                    <div class="reply-content pr">
+				                    	<span class="arrow">&nbsp;</span>
+				                    	此处省略一百字...
+				                    </div>
+				                </div>
+				            </li>
+				        </ul>
 					</div>
-				</div>
-				<div class="input-group input-group-lg">
-					<!-- <span class="input-group-btn">
-						<button class="btn btn-default" id="emotion-btn" type="button">
-							<img src="/img/emotion_smile.png" style="width:24px;height:24px;">
-						</button>
-					</span> -->
-					<input type="text" class="form-control" id="input-edit" placeholder="Enter message here">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" onclick="onClickSendMessage()">
-							send
-							<span class="glyphicon glyphicon-send"></span>
-						</button>
-					</span>
+					<div class="input-group input-group-lg">
+						<input type="text" class="form-control" id="input-edit" placeholder="Enter message here">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" onclick="onClickSendMessage()">
+								send
+								<span class="glyphicon glyphicon-send"></span>
+							</button>
+						</span>
+					</div>
 				</div>
 			</div>
 
